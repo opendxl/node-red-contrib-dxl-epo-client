@@ -1,0 +1,58 @@
+[
+    {
+        "id": "938567fb.04423",
+        "type": "tab",
+        "label": "ePO System Find Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ba46198a.179108",
+        "type": "inject",
+        "z": "938567fb.04423",
+        "name": "Set search text",
+        "topic": "",
+        "payload": "<specify-find-search-text>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 124,
+        "y": 34,
+        "wires": [
+            [
+                "feba1f42.609fb8"
+            ]
+        ]
+    },
+    {
+        "id": "8116856b.feb8a8",
+        "type": "debug",
+        "z": "938567fb.04423",
+        "name": "Output systems",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 518,
+        "y": 34,
+        "wires": []
+    },
+    {
+        "id": "feba1f42.609fb8",
+        "type": "dxl-epo-system-find",
+        "z": "938567fb.04423",
+        "name": "",
+        "searchNameOnly": false,
+        "client": "",
+        "x": 319,
+        "y": 34,
+        "wires": [
+            [
+                "8116856b.feb8a8"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "id": "6afb482a.758bc8",
+        "type": "tab",
+        "label": "ePO Threat Event Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "56298b6.850b674",
+        "type": "dxl-epo-threat-event in",
+        "z": "6afb482a.758bc8",
+        "name": "Receive ePO threat event",
+        "topic": "",
+        "client": "",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "6db540a.93927c"
+            ]
+        ]
+    },
+    {
+        "id": "6db540a.93927c",
+        "type": "debug",
+        "z": "6afb482a.758bc8",
+        "name": "Output event payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 360,
+        "y": 40,
+        "wires": []
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "id": "32d990e6.68535",
+        "type": "tab",
+        "label": "ePO System Clear Tag Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c3701568.f1e608",
+        "type": "inject",
+        "z": "32d990e6.68535",
+        "name": "Set systems to clear tag from",
+        "topic": "",
+        "payload": "<specify-systems-to-clear-tag-from>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 40,
+        "wires": [
+            [
+                "ec1f0a9a.77a688"
+            ]
+        ]
+    },
+    {
+        "id": "ffea3b15.acaca8",
+        "type": "debug",
+        "z": "32d990e6.68535",
+        "name": "Output result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 630,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ec1f0a9a.77a688",
+        "type": "dxl-epo-system-clear-tag",
+        "z": "32d990e6.68535",
+        "name": "",
+        "tag": "<specify-tag-to-clear>",
+        "client": "",
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "ffea3b15.acaca8"
+            ]
+        ]
+    }
+]

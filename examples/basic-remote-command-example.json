@@ -1,0 +1,58 @@
+[
+    {
+        "id": "1bf580db.e8d997",
+        "type": "tab",
+        "label": "ePO Remote Command Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ec127a3c.959218",
+        "type": "dxl-epo-remote-command",
+        "z": "1bf580db.e8d997",
+        "name": "Find tags in ePO",
+        "command": "system.findTag",
+        "client": "",
+        "x": 330,
+        "y": 32,
+        "wires": [
+            [
+                "2939c92b.aca126"
+            ]
+        ]
+    },
+    {
+        "id": "b5d1b5d0.81f3a",
+        "type": "inject",
+        "z": "1bf580db.e8d997",
+        "name": "Set search text",
+        "topic": "",
+        "payload": "{\"searchText\":\"dxl\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 134,
+        "y": 32,
+        "wires": [
+            [
+                "ec127a3c.959218"
+            ]
+        ]
+    },
+    {
+        "id": "2939c92b.aca126",
+        "type": "debug",
+        "z": "1bf580db.e8d997",
+        "name": "Output tags",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 510,
+        "y": 32,
+        "wires": []
+    }
+]

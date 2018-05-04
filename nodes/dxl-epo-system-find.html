@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType('dxl-epo-system-find', {
+    category: 'epo operations',
+    defaults: {
+      name: {value: ''},
+      searchNameOnly: {value: false, required: true},
+      client: {type: 'dxl-client',
+        required: false,
+        validate: function () { return DXL.validators.client(this) }
+      }
+    },
+    color: '#e9e9e9',
+    inputs: 1,
+    outputs: 1,
+    icon: 'mcafee.png',
+    label: function () {
+      return this.name || 'Find systems in ePO'
+    },
+    labelStyle: function () {
+      return this.name ? 'node_label_italic' : ''
+    },
+    paletteLabel: 'epo system find'
+  })
+</script>
+
+<script type="text/x-red" data-template-name="dxl-epo-system-find">
+    <div class="form-row">
+        <label for="node-input-client"><i class="icon-tag"></i> Client</label>
+        <input type="text" id="node-input-client" placeholder="Client">
+    </div>
+    <div class="form-row">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-searchNameOnly" placeholder="search-name-only" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-searchNameOnly" style="width: 70%;">Search name only</label>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="dxl-epo-system-find">
+    <p>TBD</p>
+</script>

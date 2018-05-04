@@ -1,0 +1,58 @@
+[
+    {
+        "id": "fa67fce2.9aa85",
+        "type": "tab",
+        "label": "ePO System Apply Tag Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3da3319.4b772ce",
+        "type": "inject",
+        "z": "fa67fce2.9aa85",
+        "name": "Set systems to tag",
+        "topic": "",
+        "payload": "<specify-systems-to-tag>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "7a5f256e.4b1b8c"
+            ]
+        ]
+    },
+    {
+        "id": "d08e0e72.5ea81",
+        "type": "debug",
+        "z": "fa67fce2.9aa85",
+        "name": "Output result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 550,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7a5f256e.4b1b8c",
+        "type": "dxl-epo-system-apply-tag",
+        "z": "fa67fce2.9aa85",
+        "name": "",
+        "tag": "<specify-tag-to-apply>",
+        "client": "",
+        "x": 350,
+        "y": 40,
+        "wires": [
+            [
+                "d08e0e72.5ea81"
+            ]
+        ]
+    }
+]
