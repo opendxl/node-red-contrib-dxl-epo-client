@@ -1,15 +1,15 @@
 [
     {
-        "id": "fa67fce2.9aa85",
+        "id": "f2c7ef2f.fd087",
         "type": "tab",
         "label": "ePO System Apply Tag Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "3da3319.4b772ce",
+        "id": "72af1c6e.bc3e54",
         "type": "inject",
-        "z": "fa67fce2.9aa85",
+        "z": "f2c7ef2f.fd087",
         "name": "Set systems to tag",
         "topic": "",
         "payload": "<specify-systems-to-tag>",
@@ -22,14 +22,14 @@
         "y": 40,
         "wires": [
             [
-                "7a5f256e.4b1b8c"
+                "817e30ac.79c24"
             ]
         ]
     },
     {
-        "id": "d08e0e72.5ea81",
+        "id": "a2ae4585.984aa8",
         "type": "debug",
-        "z": "fa67fce2.9aa85",
+        "z": "f2c7ef2f.fd087",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
@@ -41,17 +41,19 @@
         "wires": []
     },
     {
-        "id": "7a5f256e.4b1b8c",
+        "id": "817e30ac.79c24",
         "type": "dxl-epo-system-apply-tag",
-        "z": "fa67fce2.9aa85",
+        "z": "f2c7ef2f.fd087",
         "name": "",
         "tag": "<specify-tag-to-apply>",
         "client": "",
+        "returnType": "obj",
+        "outputFormat": "json",
         "x": 350,
         "y": 40,
         "wires": [
             [
-                "d08e0e72.5ea81"
+                "a2ae4585.984aa8"
             ]
         ]
     }

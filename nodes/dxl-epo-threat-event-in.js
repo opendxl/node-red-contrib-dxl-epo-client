@@ -1,7 +1,7 @@
 'use strict'
 
-var epo = require('@opendxl/dxl-epo-client')
-var EpoClient = epo.EpoClient
+var MessageUtils = require('@opendxl/node-red-contrib-dxl').MessageUtils
+var EpoClient = require('@opendxl/dxl-epo-client').EpoClient
 
 module.exports = function (RED) {
   function EpoThreatEventInNode (nodeConfig) {
@@ -15,6 +15,7 @@ module.exports = function (RED) {
     this._client = RED.nodes.getNode(nodeConfig.client)
 
     this._topic = nodeConfig.topic
+    this._payloadType = nodeConfig.payloadType || 'obj'
 
     var node = this
 
@@ -28,7 +29,8 @@ module.exports = function (RED) {
       this._client.registerUserNode(this)
       var epoClient = new EpoClient(this._client.dxlClient)
       var callback = function (threatEventObj) {
-        var msg = {payload: threatEventObj}
+        var msg = {payload: MessageUtils.objectToReturnType(threatEventObj,
+          node._payloadType)}
         node.send(msg)
       }
       epoClient.addThreatEventCallback(callback, node._topic)

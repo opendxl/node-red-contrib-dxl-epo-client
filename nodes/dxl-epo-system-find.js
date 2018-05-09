@@ -35,10 +35,12 @@ module.exports = function (RED) {
           searchText: msg.payload || '',
           searchNameOnly: node._searchNameOnly ? 1 : 0
         }
-        Util.runEpoCommand(node, msg, this._client.dxlClient)
+        Util.runEpoCommand(node, msg, this._client.dxlClient,
+          nodeConfig.returnType, nodeConfig.outputFormat)
       })
       this.on('close', function (done) {
-        node._client.unregisterUserNode(node, done)
+        node._client.unregisterUserNode(node, done,
+          nodeConfig.returnType, nodeConfig.outputFormat)
       })
       if (this._client.connected) {
         this.status({

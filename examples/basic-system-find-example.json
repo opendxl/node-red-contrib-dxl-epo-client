@@ -1,18 +1,18 @@
 [
     {
-        "id": "938567fb.04423",
+        "id": "aa6bae5f.0610f",
         "type": "tab",
         "label": "ePO System Find Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "ba46198a.179108",
+        "id": "c7bc69b9.85a7b8",
         "type": "inject",
-        "z": "938567fb.04423",
+        "z": "aa6bae5f.0610f",
         "name": "Set search text",
         "topic": "",
-        "payload": "<specify-find-search-text>",
+        "payload": "<specify-search-text>",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
@@ -22,14 +22,14 @@
         "y": 34,
         "wires": [
             [
-                "feba1f42.609fb8"
+                "66d5c266.d7f34c"
             ]
         ]
     },
     {
-        "id": "8116856b.feb8a8",
+        "id": "22434806.a71f28",
         "type": "debug",
-        "z": "938567fb.04423",
+        "z": "aa6bae5f.0610f",
         "name": "Output systems",
         "active": true,
         "tosidebar": true,
@@ -41,17 +41,19 @@
         "wires": []
     },
     {
-        "id": "feba1f42.609fb8",
+        "id": "66d5c266.d7f34c",
         "type": "dxl-epo-system-find",
-        "z": "938567fb.04423",
+        "z": "aa6bae5f.0610f",
         "name": "",
         "searchNameOnly": false,
         "client": "",
+        "returnType": "obj",
+        "outputFormat": "json",
         "x": 319,
         "y": 34,
         "wires": [
             [
-                "8116856b.feb8a8"
+                "22434806.a71f28"
             ]
         ]
     }

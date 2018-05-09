@@ -1,15 +1,15 @@
 [
     {
-        "id": "32d990e6.68535",
+        "id": "2b2e30d7.a73c7",
         "type": "tab",
         "label": "ePO System Clear Tag Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "c3701568.f1e608",
+        "id": "c46592f7.9feb5",
         "type": "inject",
-        "z": "32d990e6.68535",
+        "z": "2b2e30d7.a73c7",
         "name": "Set systems to clear tag from",
         "topic": "",
         "payload": "<specify-systems-to-clear-tag-from>",
@@ -22,14 +22,14 @@
         "y": 40,
         "wires": [
             [
-                "ec1f0a9a.77a688"
+                "7de21b85.aa4d44"
             ]
         ]
     },
     {
-        "id": "ffea3b15.acaca8",
+        "id": "f5906633.151ad8",
         "type": "debug",
-        "z": "32d990e6.68535",
+        "z": "2b2e30d7.a73c7",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
@@ -41,17 +41,19 @@
         "wires": []
     },
     {
-        "id": "ec1f0a9a.77a688",
+        "id": "7de21b85.aa4d44",
         "type": "dxl-epo-system-clear-tag",
-        "z": "32d990e6.68535",
+        "z": "2b2e30d7.a73c7",
         "name": "",
         "tag": "<specify-tag-to-clear>",
         "client": "",
+        "returnType": "obj",
+        "outputFormat": "json",
         "x": 420,
         "y": 40,
         "wires": [
             [
-                "ffea3b15.acaca8"
+                "f5906633.151ad8"
             ]
         ]
     }

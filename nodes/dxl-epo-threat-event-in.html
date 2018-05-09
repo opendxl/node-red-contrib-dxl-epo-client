@@ -7,7 +7,8 @@
       client: {type: 'dxl-client',
         required: false,
         validate: function () { return DXL.validators.client(this) }
-      }
+      },
+      payloadType: {value: 'obj'}
     },
     color: '#e9e9e9',
     inputs: 0,
@@ -35,6 +36,14 @@
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-payloadType"><i class="fa fa-arrow-left"></i> Return</span></label>
+        <select type="text" id="node-input-payloadType" style="width:70%;">
+            <option value="txt">a UTF-8 string</option>
+            <option value="bin">a binary buffer</option>
+            <option value="obj">a parsed JSON object</option>
+        </select>
     </div>
 </script>
 
