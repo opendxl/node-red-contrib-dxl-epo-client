@@ -38,8 +38,7 @@ module.exports = function (RED) {
             names: msg.payload,
             tagName: msg.tag
           }
-          Util.runEpoCommand(node, msg, this._client.dxlClient,
-            nodeConfig.returnType, nodeConfig.outputFormat)
+          Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
         } else if (!msg.payload) {
           node.error('System names were not specified in payload')
         } else {

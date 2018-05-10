@@ -6,8 +6,6 @@ module.exports = function (RED) {
   function EpoRemoteCommandNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
 
-    this._command = nodeConfig.command
-
     /**
      * Handle to the DXL client node used to make requests to the DXL fabric.
      * @type {Client}
@@ -26,9 +24,7 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        msg.command = msg.command || node._command
-        Util.runEpoCommand(node, msg, this._client.dxlClient,
-          nodeConfig.returnType, nodeConfig.outputFormat)
+        Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
       })
       this.on('close', function (done) {
         node._client.unregisterUserNode(node, done)
