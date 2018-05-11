@@ -1,5 +1,6 @@
 'use strict'
 
+var NodeUtils = require('@opendxl/node-red-contrib-dxl').NodeUtils
 var Util = require('../lib/util')
 
 var EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND = 'system.clearTag'
@@ -7,8 +8,6 @@ var EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND = 'system.clearTag'
 module.exports = function (RED) {
   function EpoSystemClearTag (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
-
-    this._tag = nodeConfig.tag
 
     /**
      * Handle to the DXL client node used to make requests to the DXL fabric.
@@ -28,15 +27,15 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        msg.tag = msg.tag || node._tag
-        if (msg.payload && msg.tag) {
+        var tag = NodeUtils.defaultIfEmpty(nodeConfig.tag, msg.tag)
+        if (msg.payload && tag) {
           if (typeof msg.payload === 'object' && msg.payload.join) {
             msg.payload = msg.payload.join(',')
           }
           msg.command = EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND
           msg.payload = {
             names: msg.payload,
-            tagName: msg.tag
+            tagName: tag
           }
           Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
         } else if (!msg.payload) {

@@ -14,7 +14,6 @@ module.exports = function (RED) {
      */
     this._client = RED.nodes.getNode(nodeConfig.client)
 
-    this._topic = nodeConfig.topic
     this._payloadType = nodeConfig.payloadType || 'obj'
 
     var node = this
@@ -33,9 +32,9 @@ module.exports = function (RED) {
           node._payloadType)}
         node.send(msg)
       }
-      epoClient.addThreatEventCallback(callback, node._topic)
+      epoClient.addThreatEventCallback(callback, nodeConfig.topic)
       this.on('close', function (done) {
-        epoClient.removeThreatEventCallback(callback)
+        epoClient.removeThreatEventCallback(callback, nodeConfig.topic)
         node._client.unregisterUserNode(node, done)
       })
       if (this._client.connected) {

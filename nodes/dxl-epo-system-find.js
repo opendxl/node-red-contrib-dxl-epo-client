@@ -8,10 +8,6 @@ module.exports = function (RED) {
   function EpoSystemFindNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
 
-    this._command = nodeConfig.command
-
-    this._searchNameOnly = nodeConfig.searchNameOnly
-
     /**
      * Handle to the DXL client node used to make requests to the DXL fabric.
      * @type {Client}
@@ -33,7 +29,7 @@ module.exports = function (RED) {
         msg.command = EPO_SYSTEM_FIND_REMOTE_COMMAND
         msg.payload = {
           searchText: msg.payload || '',
-          searchNameOnly: node._searchNameOnly ? 1 : 0
+          searchNameOnly: nodeConfig.searchNameOnly ? 1 : 0
         }
         Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
       })
