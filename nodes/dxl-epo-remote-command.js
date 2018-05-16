@@ -24,7 +24,8 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
+        Util.runEpoCommand(node, msg, msg.command, msg.payload,
+          this._client.dxlClient, nodeConfig)
       })
       this.on('close', function (done) {
         node._client.unregisterUserNode(node, done)

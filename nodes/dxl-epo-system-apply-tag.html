@@ -3,7 +3,7 @@
     category: 'epo operations',
     defaults: {
       name: {value: ''},
-      tag: {required: false, value: ''},
+      tagName: {required: false, value: ''},
       client: {type: 'dxl-client',
         required: false,
         validate: function () { return DXL.validators.client(this) }
@@ -32,8 +32,8 @@
         <input type="text" id="node-input-client" placeholder="Client">
     </div>
     <div class="form-row">
-        <label for="node-input-tag"><i class="fa fa-tasks"></i> Tag</label>
-        <input type="text" id="node-input-tag" placeholder="Tag">
+        <label for="node-input-tagName"><i class="fa fa-tasks"></i> Tag name</label>
+        <input type="text" id="node-input-tagName" placeholder="Tag name">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -60,7 +60,7 @@
             <option value="terse">Terse (text-based)</option>
         </select>
     </div>
-    <div class="form-tips">Tip: Leave tag blank if you want to set it via the <code>msg.tag</code> property</div>
+    <div class="form-tips">Tip: Leave tag name blank if you want to set it via the <code>msg.tagName</code> property</div>
     <div class="form-tips">Tip: Leave ePO id blank if you want to set it via the <code>msg.epoUniqueId</code> property</div>
 </script>
 
@@ -68,10 +68,10 @@
     <p>On an ePO server, applies the given tag to a supplied list of systems.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
-       <dt>payload <span class="property-type">string | array</span></dt>
+       <dt>names <span class="property-type">string | array</span></dt>
        <dd> The name(s) of the system(s) to apply the tag to. To apply the tag to multiple systems, the names of systems can either be delimited with a comma or supplied as an array.
        Examples: <code>'system1,system2'</code> and <code>['system1','system2']</code></dd>
-       <dt class="optional">tag <span class="property-type">string</span></dt>
+       <dt class="optional">tagName <span class="property-type">string</span></dt>
        <dd> The name of the tag to apply.</dd>
        <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
        <dd> The id of the ePO server to communicate with.</dd>
@@ -87,8 +87,8 @@
     <h3>Node Properties</h3>
     <p><i>Client</i> is the configuration node for the DXL client through which the request should be made.
     Click on the pencil icon to add or modify a client configuration.</p>
-    <p><i>Tag</i> is the name of the tag to apply.
-    If the value is empty, the tag name will be derived from the input message's <code>msg.tag</code> property.</p>
+    <p><i>Tag name</i> is the name of the tag to apply.
+    If the value is empty, the tag name will be derived from the input message's <code>msg.tagName</code> property.</p>
     <p><i>Name</i> is only used for display purposes in the Node-RED user interface.</p>
     <p><i>ePO Id</i> is the id of the ePO server to communicate with. If the value is empty, the ePO unique id will be derived from the input message's <code>msg.epoUniqueId</code> property.<
     If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</p>

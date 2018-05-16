@@ -3,11 +3,11 @@
     category: 'epo operations',
     defaults: {
       name: {value: ''},
-      searchNameOnly: {value: false, required: true},
       client: {type: 'dxl-client',
         required: false,
         validate: function () { return DXL.validators.client(this) }
       },
+      searchNameOnly: {value: ''},
       epoUniqueId: {value: ''},
       returnType: {value: 'obj'},
       outputFormat: {value: 'json'}
@@ -32,13 +32,16 @@
         <input type="text" id="node-input-client" placeholder="Client">
     </div>
     <div class="form-row">
-        <label>&nbsp;</label>
-        <input type="checkbox" id="node-input-searchNameOnly" placeholder="search-name-only" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-input-searchNameOnly" style="width: 70%;">Search name only</label>
-    </div>
-    <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-searchNameOnly"><i class="fa fa-search"></i> Search fields</span></label>
+        <select type="text" id="node-input-searchNameOnly" style="width:70%;">
+            <option value="">Defer to msg.searchNameOnly property</option>
+            <option value="0">All fields</option>
+            <option value="1">Name field only</option>
+        </select>
     </div>
     <div class="form-row">
         <label for="node-input-epoUniqueId"><i class="fa fa-tag"></i> ePO Id</label>
@@ -68,8 +71,10 @@
     <p>Find a system in the ePO System Tree.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
-       <dt>payload <span class="property-type">string | array</span></dt>
+       <dt>searchText <span class="property-type">string | array</span></dt>
        <dd> Search text for the system(s) to find.</dd>
+       <dt class="optional">searchNameOnly <span class="property-type">number | boolean</span></dt>
+       <dd> For a value of <code>1</code> or <code>true</code>, search all system fields for the search text. For a value of <code>0</code> or <code>false</code>, search only the system name field for the search text. Defaults to <code>false</code>.</dd>
        <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
        <dd> The id of the ePO server to communicate with.</dd>
     </dl>
@@ -85,6 +90,7 @@
     <p><i>Client</i> is the configuration node for the DXL client through which the request should be made.
     Click on the pencil icon to add or modify a client configuration.</p>
     <p><i>Name</i> is only used for display purposes in the Node-RED user interface.</p>
+    <p><i>Search fields</i> controls the scope of fields when searching for systems. If the value is set to <code>Defer to msg.searchNameOnly property</code>, the search field scope will be retrieved from the <code>msg.searchNameOnly</code> property in the input message.
     <p><i>ePO Id</i> is the id of the ePO server to communicate with. If the value is empty, the ePO unique id will be derived from the input message's <code>msg.epoUniqueId</code> property.
     If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</p>
     <p><i>Return</i> controls the data type for the <code>msg.payload</code> property in the output message.</p>

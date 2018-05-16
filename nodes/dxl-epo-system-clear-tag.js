@@ -27,21 +27,19 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        var tag = NodeUtils.defaultIfEmpty(nodeConfig.tag, msg.tag)
-        if (msg.payload && tag) {
-          if (typeof msg.payload === 'object' && msg.payload.join) {
-            msg.payload = msg.payload.join(',')
+        var names = msg.names
+        var tagName = NodeUtils.defaultIfEmpty(nodeConfig.tagName, msg.tagName)
+        if (names && tagName) {
+          if (typeof names === 'object' && names.payload.join) {
+            names.payload = names.join(',')
           }
-          msg.command = EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND
-          msg.payload = {
-            names: msg.payload,
-            tagName: tag
-          }
-          Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
-        } else if (!msg.payload) {
-          node.error('System names were not specified in payload')
+          Util.runEpoCommand(node, msg, EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND,
+            {names: names, tagName: tagName},
+            this._client.dxlClient, nodeConfig)
+        } else if (!names) {
+          node.error('names property was not specified')
         } else {
-          node.error('Tag was not specified')
+          node.error('tagName property was not specified')
         }
       })
       this.on('close', function (done) {

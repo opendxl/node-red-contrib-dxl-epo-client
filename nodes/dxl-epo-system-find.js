@@ -1,5 +1,6 @@
 'use strict'
 
+var NodeUtils = require('@opendxl/node-red-contrib-dxl').NodeUtils
 var Util = require('../lib/util')
 
 var EPO_SYSTEM_FIND_REMOTE_COMMAND = 'system.find'
@@ -26,12 +27,15 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        msg.command = EPO_SYSTEM_FIND_REMOTE_COMMAND
-        msg.payload = {
-          searchText: msg.payload || '',
-          searchNameOnly: nodeConfig.searchNameOnly ? 1 : 0
-        }
-        Util.runEpoCommand(node, msg, this._client.dxlClient, nodeConfig)
+        var searchNameOnly = NodeUtils.valueToNumber(
+          NodeUtils.valueToNumber(nodeConfig.searchNameOnly, msg.searchNameOnly),
+          0)
+        Util.runEpoCommand(node, msg, EPO_SYSTEM_FIND_REMOTE_COMMAND,
+          {
+            searchText: msg.searchText || '',
+            searchNameOnly: searchNameOnly
+          },
+          this._client.dxlClient, nodeConfig)
       })
       this.on('close', function (done) {
         node._client.unregisterUserNode(node, done,

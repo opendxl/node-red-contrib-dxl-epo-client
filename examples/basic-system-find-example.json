@@ -1,16 +1,16 @@
 [
     {
-        "id": "aa6bae5f.0610f",
+        "id": "b1270d2f.50822",
         "type": "tab",
         "label": "ePO System Find Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "c7bc69b9.85a7b8",
+        "id": "2f7039ec.2d3796",
         "type": "inject",
-        "z": "aa6bae5f.0610f",
-        "name": "Set search text",
+        "z": "b1270d2f.50822",
+        "name": "Specify search text",
         "topic": "",
         "payload": "<specify-search-text>",
         "payloadType": "str",
@@ -18,42 +18,77 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 124,
-        "y": 34,
+        "x": 130,
+        "y": 40,
         "wires": [
             [
-                "66d5c266.d7f34c"
+                "f92b5a0f.25be38"
             ]
         ]
     },
     {
-        "id": "22434806.a71f28",
+        "id": "4b68346e.68111c",
         "type": "debug",
-        "z": "aa6bae5f.0610f",
+        "z": "b1270d2f.50822",
         "name": "Output systems",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 518,
-        "y": 34,
+        "x": 540,
+        "y": 200,
         "wires": []
     },
     {
-        "id": "66d5c266.d7f34c",
+        "id": "368ebbfa.2801f4",
         "type": "dxl-epo-system-find",
-        "z": "aa6bae5f.0610f",
+        "z": "b1270d2f.50822",
         "name": "",
-        "searchNameOnly": false,
         "client": "",
+        "searchNameOnly": "",
+        "epoUniqueId": "",
         "returnType": "obj",
         "outputFormat": "json",
-        "x": 319,
-        "y": 34,
+        "x": 340,
+        "y": 200,
         "wires": [
             [
-                "22434806.a71f28"
+                "4b68346e.68111c"
+            ]
+        ]
+    },
+    {
+        "id": "f92b5a0f.25be38",
+        "type": "change",
+        "z": "b1270d2f.50822",
+        "name": "Set searchText request parameter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "searchText",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "searchNameOnly",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "368ebbfa.2801f4"
             ]
         ]
     }
