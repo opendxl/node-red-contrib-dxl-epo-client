@@ -68,33 +68,39 @@
     <p>On an ePO server, applies the given tag to a supplied list of systems.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
-       <dt>names <span class="property-type">string | array</span></dt>
-       <dd> The name(s) of the system(s) to apply the tag to. To apply the tag to multiple systems, the names of systems can either be delimited with a comma or supplied as an array.
-       Examples: <code>'system1,system2'</code> and <code>['system1','system2']</code></dd>
-       <dt class="optional">tagName <span class="property-type">string</span></dt>
-       <dd> The name of the tag to apply.</dd>
-       <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
-       <dd> The id of the ePO server to communicate with.</dd>
+        <dt>names <span class="property-type">string | array</span></dt>
+        <dd> Name(s) of the system(s) to apply the tag to. To apply the tag to multiple systems, the names of systems can either be delimited with a comma or supplied as an array.
+        Examples: <code>'system1,system2'</code> and <code>['system1','system2']</code></dd>
+        <dt class="optional">tagName <span class="property-type">string</span></dt>
+        <dd> Name of the tag to apply.</dd>
+        <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
+        <dd> Id of the ePO server to communicate with.</dd>
     </dl>
     <h3>Outputs</h3>
     <dl class="message-properties">
-       <dt>payload <span class="property-type">string | object | buffer</span></dt>
-       <dd> The result of the remote command execution. The format of the response provided by the ePO server &mdash; <code>JSON</code>, <code>XML</code>, <code>Verbose</code>, or <code>Terse</code> &mdash; can be controlled by setting the <i>Format</i> node property.
-       Through the <i>Return</i> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+        <dt>payload <span class="property-type">string | object | buffer</span></dt>
+        <dd> Result of the remote command execution. The format of the response provided by the ePO server &mdash; <code>JSON</code>, <code>XML</code>, <code>Verbose</code>, or <code>Terse</code> &mdash; can be controlled by setting the <code>Format</code> node property.
+        Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
     <h3>Prerequisites</h3>
     <p>This node requires an ePO DXL service to be running and available on the DXL fabric. A Python-based implementation of an ePO DXL service is available <a href="https://github.com/opendxl/opendxl-epo-service-python" target="_blank">here</a>.</p>
     <h3>Node Properties</h3>
-    <p><i>Client</i> is the configuration node for the DXL client through which the request should be made.
-    Click on the pencil icon to add or modify a client configuration.</p>
-    <p><i>Tag name</i> is the name of the tag to apply.
-    If the value is empty, the tag name will be derived from the input message's <code>msg.tagName</code> property.</p>
-    <p><i>Name</i> is only used for display purposes in the Node-RED user interface.</p>
-    <p><i>ePO Id</i> is the id of the ePO server to communicate with. If the value is empty, the ePO unique id will be derived from the input message's <code>msg.epoUniqueId</code> property.<
-    If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</p>
-    <p><i>Return</i> controls the data type for the <code>msg.payload</code> property in the output message.</p>
-    <p><i>Format</i> controls the format of the response returned from the ePO server, which is used for the <code>msg.payload</code> property in the output message.</p>
-    <p>If an error occurs when attempting to convert the payload into the desired data type, the current flow is halted with an error.</p>
+    <dl class="message-properties">
+        <dt>Client</dt>
+        <dd> Configuration node for the DXL client through which the request should be made. Click on the pencil icon to add or modify a client configuration.</dd>
+        <dt>Tag name</dt>
+        <dd> Name of the tag to apply. If the value is empty, the tag name will be derived from the input message's <code>msg.tagName</code> property.</dd>
+        <dt>Name</dt>
+        <dd> Only used for display purposes in the Node-RED user interface.</dd>
+        <dt>ePO Id</dt>
+        <dd> Id of the ePO server to communicate with. If the value is empty, the ePO unique id will be derived from the input message's <code>msg.epoUniqueId</code> property.
+        If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</dd>
+        <dt>Return</dt>
+        <dd> Controls the data type for the <code>msg.payload</code> property in the output message.</dd>
+        <dt>Format</dt>
+        <dd> Controls the format of the response returned from the ePO server, which is used for the <code>msg.payload</code> property in the output message.
+        If an error occurs when attempting to convert the payload into the desired data type, the current flow is halted with an error.</dd>
+    </dl>
     <h3>Details</h3>
     <p>The <code>msg.payload</code> in the output message should include the number of systems to which the tag was applied. If the tag name does not exist in ePO, the current flow is halted with an error.</p>
 </script>

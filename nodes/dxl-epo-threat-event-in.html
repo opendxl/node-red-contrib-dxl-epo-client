@@ -51,14 +51,18 @@
     <p>Subscribes for threat events that ePO sends through the DXL fabric.</p>
     <h3>Outputs</h3>
     <dl class="message-properties">
-       <dt>payload <span class="property-type">string | object | buffer</span></dt>
-       <dd> The payload of the threat event. Through the <i>Payload type</i> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+        <dt>payload <span class="property-type">string | object | buffer</span></dt>
+        <dd> Payload of the threat event. Through the <code>Payload type</code> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
     <h3>Node Properties</h3>
-    <p><i>Client</i> is the configuration node for the DXL client through which the request should be made.
-    Click on the pencil icon to add or modify a client configuration.</p>
-    <p><i>Topic</i> is an optional DXL topic name that the node should subscribe to for threat events. If not specified, the node subscribes to <code>/mcafee/event/epo/threat/response</code>.
-    <p><i>Name</i> is only used for display purposes in the Node-RED user interface.</p>
-    <p><i>Payload type</i> controls the data type for the <code>msg.payload</code> property in the new message injected into a flow.
-    If an error occurs when attempting to convert the binary Buffer of the payload into the desired data type, the current flow is halted with an error.</p>
+    <dl class="message-properties">
+        <dt>Client</dt>
+        <dd> Configuration node for the DXL client through which the request should be made. Click on the pencil icon to add or modify a client configuration.</dd>
+        <dt>Topic</dt>
+        <dd> Optional DXL topic name that the node should subscribe to for threat events. If not specified, the node subscribes to <code>/mcafee/event/epo/threat/response</code>.</dd>
+        <dt>Name</dt>
+        <dd> Used only for display purposes in the Node-RED user interface.</dd>
+        <dt>Payload type</dt>
+        <dd> Controls the data type for the <code>msg.payload</code> property in the new message injected into a flow. If an error occurs when attempting to convert the binary Buffer of the payload into the desired data type, the current flow is halted with an error.</dd>
+    </dl>
 </script>
