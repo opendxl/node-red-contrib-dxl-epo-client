@@ -85,7 +85,11 @@
         Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
     <h3>Prerequisites</h3>
-    <p>This node requires an ePO DXL service to be running and available on the DXL fabric. A Python-based implementation of an ePO DXL service is available <a href="https://github.com/opendxl/opendxl-epo-service-python" target="_blank">here</a>.</p>
+    <ul>
+        <li>This node requires an ePO DXL service to be running and available on the DXL fabric. A Python-based implementation of an ePO DXL service is available <a href="https://github.com/opendxl/opendxl-epo-service-python" target="_blank">here</a>.</li>
+        <li>The DXL client that this node is using is authorized to invoke the ePO DXL Service (see <a href="https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization" target="_blank">Client Authorization</a>).</li>
+        <li>The user that is connecting to the ePO server has permission to execute the <code>system.find</code> remote command (see <a href="https://opendxl.github.io/opendxl-epo-service-python/pydoc/configuration.html#dxl-service-config-file-label" target="_blank">Service Configuration File</a>).
+    </ul>
     <h3>Node Properties</h3>
     <dl class="message-properties">
         <dt>Client</dt>
