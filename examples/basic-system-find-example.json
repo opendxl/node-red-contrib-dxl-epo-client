@@ -1,15 +1,15 @@
 [
     {
-        "id": "b1270d2f.50822",
+        "id": "bb1aec91.184b1",
         "type": "tab",
         "label": "ePO System Find Example",
         "disabled": false,
-        "info": ""
+        "info": "This sample invokes and displays the results of a \"system.find\" remote command\r\nvia the ePO DXL service. The results of the find command are displayed on the\r\nNode-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see the\r\n  [DXL Configuration Sample](https://github.com/opendxl/node-red-contrib-dxl/wiki/Client-Configuration)).\r\n* The ePO DXL service is running\r\n  (see [Running Service](https://opendxl.github.io/opendxl-epo-service-python/pydoc/running.html)).\r\n* The DXL client associated with the\r\n`Find systems in ePO` node is authorized to invoke the ePO DXL Service\r\n  (see [Client Authorization](https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization)).\r\n* The user that is connecting to the ePO server has permission to execute the\r\n  \"system.find\" remote command\r\n  (see [Service Configuration File](https://opendxl.github.io/opendxl-epo-service-python/pydoc/configuration.html#dxl-service-config-file-label)).\r\n\r\n### Setup\r\n\r\n* If more than one ePO service is available on the DXL fabric that the DXL\r\n  client is connecting to, edit the `Find systems in ePO` node and set the `ePO Id`\r\n  property to the value of the `uniqueId` specified in the \r\n  [Service Configuration File](https://opendxl.github.io/opendxl-epo-service-python/pydoc/configuration.html#dxl-service-config-file-label).\r\n  By default, the `ePO Id` property is empty, in which case the client attempts\r\n  to dynamically determine the id of the ePO service to communicate with.\r\n* Edit the `Specify search text` node and modify the `Payload`  property with\r\n  the search text to use for the system find command. For example:\r\n\r\n  ```\r\n  broker\r\n  ```\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Find systems in ePO` node.\r\n\r\n### Running\r\n\r\nTo exercise the flow, double-click the button on the left side of the\r\n`Specify search text` node.\r\n\r\n### Output\r\n\r\nThe following output should appear in the Node-RED `debug` tab:\r\n\r\n```\r\n▶ [ object ]\r\n```\r\n\r\nAfter clicking on the right arrow button to expand the contents of the object,\r\noutput similar to the following should appear:\r\n\r\n```\r\n▼ array[1]\r\n ▼ 0: object\r\n    EPOComputerProperties.ParentID: 2\r\n    EPOComputerProperties.ComputerName\": \"mysystem\",\r\n    EPOComputerProperties.Description\": null,\r\n...\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Specify search text\r\n\r\nThis is an `inject` input node which starts the flow. This node injects a new\r\nmessage with a `payload` property which specifies the search text to use for the\r\nsystem find command.\r\n\r\n#### Set searchText request parameter\r\n\r\nThis is a `change` node which copies the value from the `payload` property on\r\nthe message to the `searchText` property. The `Find systems in ePO` node uses the `searchText` property when constructing\r\nthe parameters for the `system.find` remote command. \r\n\r\n#### Find systems in ePO\r\n\r\nThis is an `epo system find` node. This node connects to the DXL fabric and\r\nsends a DXL `Request` message to the ePO service. The message specifies the\r\ntarget remote command as `system.find`.\r\n\r\nThe request message also includes the `msg.searchText` property set by the\r\n`Set searchText request parameter` node.\r\n \r\nThe `Return` property is set to \"a parsed JSON object\" and the `Format` property\r\nis set to \"JSON\" to indicate that the payload for the response should be\r\nadded to the output message as a JavaScript object decoded from JSON.\r\n\r\n#### Output result\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Find systems in ePO` node. The output should include\r\nthe response received from the DXL fabric for the `system.find` command."
     },
     {
-        "id": "2f7039ec.2d3796",
+        "id": "6709d0f1.d7d5f",
         "type": "inject",
-        "z": "b1270d2f.50822",
+        "z": "bb1aec91.184b1",
         "name": "Specify search text",
         "topic": "",
         "payload": "<specify-search-text>",
@@ -19,49 +19,49 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 40,
+        "y": 100,
         "wires": [
             [
-                "f92b5a0f.25be38"
+                "740f9647.2d34c8"
             ]
         ]
     },
     {
-        "id": "4b68346e.68111c",
+        "id": "68f5beac.c2936",
         "type": "debug",
-        "z": "b1270d2f.50822",
+        "z": "bb1aec91.184b1",
         "name": "Output systems",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 540,
-        "y": 200,
+        "x": 480,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "368ebbfa.2801f4",
+        "id": "3bc47f4.dc1a48",
         "type": "dxl-epo-system-find",
-        "z": "b1270d2f.50822",
+        "z": "bb1aec91.184b1",
         "name": "",
         "client": "",
         "searchNameOnly": "",
         "epoUniqueId": "",
         "returnType": "obj",
         "outputFormat": "json",
-        "x": 340,
-        "y": 200,
+        "x": 280,
+        "y": 300,
         "wires": [
             [
-                "4b68346e.68111c"
+                "68f5beac.c2936"
             ]
         ]
     },
     {
-        "id": "f92b5a0f.25be38",
+        "id": "740f9647.2d34c8",
         "type": "change",
-        "z": "b1270d2f.50822",
+        "z": "bb1aec91.184b1",
         "name": "Set searchText request parameter",
         "rules": [
             {
@@ -84,12 +84,22 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
-        "y": 120,
+        "x": 260,
+        "y": 200,
         "wires": [
             [
-                "368ebbfa.2801f4"
+                "3bc47f4.dc1a48"
             ]
         ]
+    },
+    {
+        "id": "9551070a.7e27d8",
+        "type": "comment",
+        "z": "bb1aec91.184b1",
+        "name": "Supply the system search text to use in the 'Set search text' node",
+        "info": "",
+        "x": 250,
+        "y": 40,
+        "wires": []
     }
 ]

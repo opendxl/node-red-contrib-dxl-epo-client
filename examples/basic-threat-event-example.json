@@ -1,15 +1,15 @@
 [
     {
-        "id": "18516c8f.6013b3",
+        "id": "b9a99589.4a8cd8",
         "type": "tab",
         "label": "ePO Threat Event Example",
         "disabled": false,
-        "info": ""
+        "info": "This sample registers with the DXL fabric to receive threat event notifications\r\nfrom ePO via the ePO DXL service. The payload in the event message received from\r\nthe DXL fabric is printed to the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see the\r\n  [DXL Configuration Sample](https://github.com/opendxl/node-red-contrib-dxl/wiki/Client-Configuration)).\r\n* The ePO DXL service is running\r\n  (see [Running Service](https://opendxl.github.io/opendxl-epo-service-python/pydoc/running.html)).\r\n* The client is authorized to receive \"ePO Threat Event Automatic Response Events\"\r\n  (see [Client Authorization](https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization)).\r\n\r\n### Setup\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Receive ePO threat event`\r\n  node.\r\n\r\n### Output\r\n\r\nWhen an ePO threat event is received, the following output should appear in the\r\nNode-RED `debug` tab:\r\n\r\n```\r\n▶ [ object ]\r\n```\r\n\r\nClick on the right arrow button to expand the contents of the object.\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Receive ePO threat event\r\n\r\nThis is an `epo threat event` input node which starts the flow. This node\r\ninjects a new message with a `payload` property which includes the information\r\nfrom the threat event.\r\n\r\n#### Output result\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Receive ePO threat event` node."
     },
     {
-        "id": "45dd2662.53baa8",
+        "id": "ca3fe660.54d5b8",
         "type": "dxl-epo-threat-event in",
-        "z": "18516c8f.6013b3",
+        "z": "b9a99589.4a8cd8",
         "name": "Receive ePO threat event",
         "topic": "",
         "client": "",
@@ -18,14 +18,14 @@
         "y": 40,
         "wires": [
             [
-                "7ec2dd30.e4e6b4"
+                "d682a370.1a3ff"
             ]
         ]
     },
     {
-        "id": "7ec2dd30.e4e6b4",
+        "id": "d682a370.1a3ff",
         "type": "debug",
-        "z": "18516c8f.6013b3",
+        "z": "b9a99589.4a8cd8",
         "name": "Output event payload",
         "active": true,
         "tosidebar": true,
