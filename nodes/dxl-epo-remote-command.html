@@ -5,10 +5,7 @@
       name: {value: ''},
       command: {value: ''},
       epoUniqueId: {value: ''},
-      client: {type: 'dxl-client',
-        required: false,
-        validate: function () { return DXL.validators.client(this) }
-      },
+      client: {type: 'dxl-client', required: true},
       returnType: {value: 'obj'},
       outputFormat: {value: 'json'}
     },

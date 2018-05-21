@@ -4,10 +4,7 @@
     defaults: {
       name: {value: ''},
       topic: {value: '', required: false},
-      client: {type: 'dxl-client',
-        required: false,
-        validate: function () { return DXL.validators.client(this) }
-      },
+      client: {type: 'dxl-client', required: true},
       payloadType: {value: 'obj'}
     },
     color: '#e9e9e9',

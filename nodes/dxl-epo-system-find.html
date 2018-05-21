@@ -3,10 +3,7 @@
     category: 'epo operations',
     defaults: {
       name: {value: ''},
-      client: {type: 'dxl-client',
-        required: false,
-        validate: function () { return DXL.validators.client(this) }
-      },
+      client: {type: 'dxl-client', required: true},
       searchNameOnly: {value: ''},
       epoUniqueId: {value: ''},
       returnType: {value: 'obj'},
