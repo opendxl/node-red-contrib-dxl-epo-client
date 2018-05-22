@@ -1,5 +1,6 @@
 'use strict'
 
+var NodeUtils = require('@opendxl/node-red-contrib-dxl').NodeUtils
 var Util = require('../lib/util')
 
 module.exports = function (RED) {
@@ -24,7 +25,8 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        Util.runEpoCommand(node, msg, msg.command, msg.payload,
+        Util.runEpoCommand(node, msg,
+          NodeUtils.extractProperty(msg, 'command'), msg.payload,
           this._client.dxlClient, nodeConfig)
       })
       this.on('close', function (done) {

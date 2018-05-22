@@ -28,11 +28,12 @@ module.exports = function (RED) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
         var searchNameOnly = NodeUtils.valueToNumber(
-          NodeUtils.valueToNumber(nodeConfig.searchNameOnly, msg.searchNameOnly),
+          NodeUtils.valueToNumber(nodeConfig.searchNameOnly,
+            NodeUtils.extractProperty(msg, 'searchNameOnly')),
           0)
         Util.runEpoCommand(node, msg, EPO_SYSTEM_FIND_REMOTE_COMMAND,
           {
-            searchText: msg.searchText || '',
+            searchText: NodeUtils.extractProperty(msg, 'searchText') || '',
             searchNameOnly: searchNameOnly
           },
           this._client.dxlClient, nodeConfig)

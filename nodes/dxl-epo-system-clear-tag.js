@@ -27,8 +27,9 @@ module.exports = function (RED) {
     if (node._client) {
       node._client.registerUserNode(this)
       this.on('input', function (msg) {
-        var names = msg.names
-        var tagName = NodeUtils.defaultIfEmpty(nodeConfig.tagName, msg.tagName)
+        var names = NodeUtils.extractProperty(msg, 'names')
+        var tagName = NodeUtils.defaultIfEmpty(nodeConfig.tagName,
+          NodeUtils.extractProperty(msg, 'tagName'))
         if (names && tagName) {
           if (typeof names === 'object' && names.payload.join) {
             names.payload = names.join(',')
