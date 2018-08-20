@@ -6,8 +6,7 @@
       tagName: {required: false, value: ''},
       client: {type: 'dxl-client', required: true},
       epoUniqueId: {value: ''},
-      returnType: {value: 'obj'},
-      outputFormat: {value: 'json'}
+      returnType: {value: 'obj'}
     },
     color: '#e9e9e9',
     inputs: 1,
@@ -48,15 +47,6 @@
             <option value="obj">a parsed JSON object</option>
         </select>
     </div>
-    <div class="form-row">
-        <label for="node-input-outputFormat"><i class="fa fa-arrow-left"></i> Format</span></label>
-        <select type="text" id="node-input-outputFormat" style="width:70%;">
-            <option value="json">JSON</option>
-            <option value="xml">XML</option>
-            <option value="verbose">Verbose (text-based)</option>
-            <option value="terse">Terse (text-based)</option>
-        </select>
-    </div>
     <div class="form-tips">Tip: Leave tag name blank if you want to set it via the <code>msg.tagName</code> property</div>
     <div class="form-tips">Tip: Leave ePO id blank if you want to set it via the <code>msg.epoUniqueId</code> property</div>
 </script>
@@ -68,7 +58,7 @@
         <dt>names <span class="property-type">string | array</span></dt>
         <dd> Name(s) of the system(s) to apply the tag to. To apply the tag to multiple systems, the names of systems can either be delimited with a comma or supplied as an array.
         Examples: <code>'system1,system2'</code> and <code>['system1','system2']</code></dd>
-        <dt class="optional">tagName <span class="property-type">string</span></dt>
+        <dt>tagName <span class="property-type">string</span></dt>
         <dd> Name of the tag to apply.</dd>
         <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
         <dd> Id of the ePO server to communicate with.</dd>
@@ -76,8 +66,8 @@
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload <span class="property-type">string | object | buffer</span></dt>
-        <dd> Result of the remote command execution. The format of the response provided by the ePO server &mdash; <code>JSON</code>, <code>XML</code>, <code>Verbose</code>, or <code>Terse</code> &mdash; can be controlled by setting the <code>Format</code> node property.
-        Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+        <dd> Result of the remote command execution.
+         Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
     <p>The <code>names</code> and <code>tagName</code> properties are removed, if present, from the output message.</p>
     <h3>Prerequisites</h3>
@@ -99,9 +89,6 @@
         If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</dd>
         <dt>Return</dt>
         <dd> Controls the data type for the <code>msg.payload</code> property in the output message.</dd>
-        <dt>Format</dt>
-        <dd> Controls the format of the response returned from the ePO server, which is used for the <code>msg.payload</code> property in the output message.
-        If an error occurs when attempting to convert the payload into the desired data type, the current flow is halted with an error.</dd>
     </dl>
     <h3>Details</h3>
     <p>The <code>msg.payload</code> in the output message should include the number of systems to which the tag was applied. If the tag name does not exist in ePO, the current flow is halted with an error.</p>
