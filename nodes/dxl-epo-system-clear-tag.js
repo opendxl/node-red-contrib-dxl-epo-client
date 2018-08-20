@@ -31,8 +31,8 @@ module.exports = function (RED) {
         var tagName = NodeUtils.defaultIfEmpty(nodeConfig.tagName,
           NodeUtils.extractProperty(msg, 'tagName'))
         if (names && tagName) {
-          if (typeof names === 'object' && names.payload.join) {
-            names.payload = names.join(',')
+          if (typeof names === 'object' && names.join) {
+            names = names.join(',')
           }
           Util.runEpoCommand(node, msg, EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND,
             {names: names, tagName: tagName},
