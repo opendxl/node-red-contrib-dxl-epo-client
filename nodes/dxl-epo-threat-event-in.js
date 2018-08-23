@@ -1,9 +1,32 @@
+/**
+ * @module DxlEpoThreatEventIn
+ * @description Implementation of the `dxl-epo-threat-event in` node
+ * @private
+ */
+
 'use strict'
 
 var MessageUtils = require('@opendxl/node-red-contrib-dxl').MessageUtils
 var EpoClient = require('@opendxl/dxl-epo-client').EpoClient
 
 module.exports = function (RED) {
+  /**
+   * @classdesc Node which registers an event callback with the DXL client to
+   * receive ePO threat events.
+   * @param {Object} nodeConfig - Configuration data which the node uses.
+   * @param {String} nodeConfig.client - Id of the DXL client configuration node
+   *   that this node should be associated with.
+   * @param {String} [nodeConfig.topic='/mcafee/event/epo/threat/response'] -
+   *   Topic to subscribe to for event notifications.
+   * @param {String} [nodeConfig.payloadType=obj] - Controls the data type for
+   *   the threat event payload, set as `msg.payload`. If payloadType is 'bin',
+   *   `msg.payload` is raw binary Buffer. If payloadType is 'txt',
+   *   `msg.payload` is a String (decoded as UTF-8). If payloadType is 'obj', is
+   *   an Object (decoded as a JSON document from the original payload). If an
+   *   error occurs when attempting to convert the binary Buffer of the payload
+   *   into the desired data type, the current flow is halted with an error.
+   * @constructor
+   */
   function EpoThreatEventInNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
 
@@ -14,6 +37,11 @@ module.exports = function (RED) {
      */
     this._client = RED.nodes.getNode(nodeConfig.client)
 
+    /**
+     * Controls the data type for the threat event payload.
+     * @type {String}
+     * @private
+     */
     this._payloadType = nodeConfig.payloadType || 'obj'
 
     var node = this

@@ -1,3 +1,9 @@
+/**
+ * @module DxlEpoSystemClearTag
+ * @description Implementation of the `dxl-epo-system-clear-tag` node
+ * @private
+ */
+
 'use strict'
 
 var NodeUtils = require('@opendxl/node-red-contrib-dxl').NodeUtils
@@ -6,6 +12,26 @@ var Util = require('../lib/util')
 var EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND = 'system.clearTag'
 
 module.exports = function (RED) {
+  /**
+   * @classdesc Node which invokes the ePO 'system.clearTag' command.
+   * @param {Object} nodeConfig - Configuration data which the node uses.
+   * @param {String} nodeConfig.client - Id of the DXL client configuration node
+   *   that this node should be associated with.
+   * @param {String} [nodeConfig.tagName] - The name of the tag to clear. If an
+   *    empty value is set for this parameter, the value in the `msg.tagName`
+   *    parameter is used instead of the value in this parameter.
+   * @param {String} [nodeConfig.epoUniqueId] - The unique identifier used to
+   *   specify the ePO server that this client will communicate with.
+   * @param {String} [nodeConfig.returnType=obj] - Controls the data type for
+   *   the remote command response payload, set as `msg.payload`. If
+   *   returnType is 'bin', `msg.payload` is raw binary Buffer. If returnType
+   *   is 'txt', `msg.payload` is a String (decoded as UTF-8). If returnType is
+   *   'obj', is an Object (decoded as a JSON document from the original
+   *   payload). If an error occurs when attempting to convert the binary
+   *   Buffer of the payload into the desired data type, the current flow is
+   *   halted with an error.
+   * @constructor
+   */
   function EpoSystemClearTag (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
 
@@ -35,8 +61,9 @@ module.exports = function (RED) {
             names = names.join(',')
           }
           Util.runEpoCommand(node, msg, EPO_SYSTEM_CLEAR_TAG_REMOTE_COMMAND,
-            {names: names, tagName: tagName},
-            this._client.dxlClient, nodeConfig)
+            this._client.dxlClient, nodeConfig,
+            {names: names, tagName: tagName}
+          )
         } else if (!names) {
           node.error('names property was not specified')
         } else {

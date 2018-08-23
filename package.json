@@ -28,11 +28,13 @@
     "@opendxl/dxl-epo-client": "^0.1.0"
   },
   "devDependencies": {
+    "jsdoc": "^3.5.5",
     "jshint": "^2.9.5",
     "eslint-plugin-html": "^3.2.2",
     "mocha": "^4.1.0",
     "node-red": "^0.18.0",
     "node-red-node-test-helper": "^0.1.8",
+    "rimraf": "^2.6.2",
     "should": "^13.2.1",
     "standard": "^10.0.3",
     "snazzy": "^7.0.0"
@@ -57,14 +59,15 @@
     "lint:jshint": "jshint nodes lib test",
     "lint:standard": "standard \"**/*.html\" \"**/*.js\" | snazzy",
     "preci": "npm run lint",
-    "ci": "npm run test"
+    "ci": "npm run test",
+    "doc": "jsdoc -c ./doc/conf.json doc/index.md -r lib/ -u doc/sdk -d out/jsdoc",
+    "postdoc": "node scripts/postdoc.js"
   },
   "standard": {
     "env": [
       "mocha"
     ],
     "globals": [
-      "DXL",
       "RED",
       "$"
     ],
