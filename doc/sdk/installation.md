@@ -1,7 +1,7 @@
 ### Prerequisites
 
-To use the Node-RED McAfee ePolicy Orchestrator (ePO) client contribution
-package, the following prerequisites must be satisfied:
+To use the McAfee ePolicy Orchestrator (ePO) DXL Node-RED client package, the
+following prerequisites must be satisfied:
 
 * Node-RED must be installed.
 
@@ -15,28 +15,29 @@ package, the following prerequisites must be satisfied:
   > **Note**: In order to be able to import examples properly from the Node-RED
   > UI, version 0.18.0 or newer of Node-RED should be installed.
 
-* The [OpenDXL Node-RED Nodes](https://github.com/opendxl/node-red-contrib-dxl)
-  contribution package must be installed in Node-RED.
+* The [OpenDXL Node-RED](https://github.com/opendxl/node-red-contrib-dxl) core
+  package must be installed in Node-RED.
 
   > **Note**: If you use the
   > [OpenDXL Node-RED Docker](https://github.com/opendxl/opendxl-node-red-docker)
-  > image, the OpenDXL Node-RED Nodes package should be installed automatically
+  > image, the OpenDXL Node-RED core package should be installed automatically
   > on the first run of the Docker container.
 
 ### Installation
 
-The Node-RED ePO client package can be installed via the following approaches:
+The ePO DXL Node-RED client package can be installed via the following
+approaches:
 
 * Node-RED Based
 
-  With this approach, the Node-RED ePO client package is installed from within
-  Node-RED itself. See the
+  With this approach, the ePO DXL Node-RED client package is installed from
+  within Node-RED itself. See the
   [Node-RED Based Installation](#node-red-based-installation) section below for
   more information.
 
 * Command Line Installation
 
-  With this approach, the Node-RED ePO client package is installed via
+  With this approach, the ePO DXL Node-RED client package is installed via
   [npm](https://docs.npmjs.com/) from the command-line on the host where the
   Node-RED server is running. See the
   [Command Line Installation](#command-line-installation) section below for more
@@ -72,8 +73,8 @@ The Node-RED ePO client package can be installed via the following approaches:
 
 #### Command Line Installation
 
-Before installing the Node-RED ePO client package, first navigate in a command
-shell to the user directory which you have configured for Node-RED. The
+Before installing the ePO DXL Node-RED client package, first navigate in a
+command shell to the user directory which you have configured for Node-RED. The
 `.node-red` directory under the user's `HOME` directory is the default user
 directory for Node-RED.
 

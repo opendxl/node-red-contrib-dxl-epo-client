@@ -1,7 +1,7 @@
 ## Overview
 
-The Node-RED [McAfee ePolicy Orchestrator](https://www.mcafee.com/us/products/epolicy-orchestrator.aspx)
-(ePO) client contribution package enables the development of flows in
+The [McAfee ePolicy Orchestrator](https://www.mcafee.com/us/products/epolicy-orchestrator.aspx)
+(ePO) DXL Node-RED client package enables the development of flows in
 [Node-RED](https://nodered.org/) which invoke ePO remote commands via the
 [Data Exchange Layer](http://www.mcafee.com/us/solutions/data-exchange-layer.aspx)
 (DXL) fabric.
@@ -12,7 +12,7 @@ The Node-RED [McAfee ePolicy Orchestrator](https://www.mcafee.com/us/products/ep
 
 ## Configuration
 
-* {@tutorial configuration}
+* [Client Configuration](https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html)
 
 ## Samples
 
