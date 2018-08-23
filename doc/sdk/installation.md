@@ -15,13 +15,41 @@ following prerequisites must be satisfied:
   > **Note**: In order to be able to import examples properly from the Node-RED
   > UI, version 0.18.0 or newer of Node-RED should be installed.
 
-* The [OpenDXL Node-RED](https://github.com/opendxl/node-red-contrib-dxl) core
+* [OpenDXL Node-RED](https://github.com/opendxl/node-red-contrib-dxl) core
   package must be installed in Node-RED.
 
   > **Note**: If you use the
   > [OpenDXL Node-RED Docker](https://github.com/opendxl/opendxl-node-red-docker)
   > image, the OpenDXL Node-RED core package should be installed automatically
   > on the first run of the Docker container.
+
+* McAfee ePolicy Orchestrator (ePO) service is running and available on DXL
+  fabric.
+
+  * If version 5.0 or later of the DXL ePO extensions are installed on your ePO
+    server, an ePO DXL service should already be running on the fabric.
+
+  * If you are using an earlier version of the DXL ePO extensions, you can use the
+    [McAfee ePolicy Orchestrator (ePO) DXL Python Service](https://github.com/opendxl/opendxl-epo-service-python).
+
+* DXL client has been configured in Node-RED.
+
+  * <https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html>
+
+* Node-RED DXL client has permission to invoke ePO remote commands.
+
+  * If version 5.0 or later of DXL ePO extensions are installed on your ePO
+    server, follow the steps on the
+    [ePO DXL Python Client Authorization](https://opendxl.github.io/opendxl-epo-client-python/pydoc/authorization.html)
+    page to ensure that the Node-RED DXL client has appropriate authorization to
+    perform ePO remote commands.
+
+  * If you are using the standalone
+    [ePO DXL Python Service](https://github.com/opendxl/opendxl-epo-service-python)
+    to proxy remote commands to the ePO server, follow the steps on the
+    [ePO DXL Python Service Authorization](https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization)
+    page to ensure that the Node-RED DXL client has appropriate authorization
+    to perform ePO remote commands.
 
 ### Installation
 
