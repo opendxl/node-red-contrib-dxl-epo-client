@@ -28,6 +28,7 @@
     "@opendxl/dxl-epo-client": "^0.1.0"
   },
   "devDependencies": {
+    "archiver": "^2.1.1",
     "jsdoc": "^3.5.5",
     "jshint": "^2.9.5",
     "eslint-plugin-html": "^3.2.2",
@@ -54,6 +55,8 @@
     }
   },
   "scripts": {
+    "predist": "npm install && rimraf *.tgz",
+    "dist": "npm pack && npm run doc && node scripts/dist.js",
     "test": "mocha --recursive",
     "lint": "npm run lint:jshint && npm run lint:standard",
     "lint:jshint": "jshint nodes lib test",
