@@ -51,6 +51,8 @@ following prerequisites must be satisfied:
     page to ensure that the Node-RED DXL client has appropriate authorization
     to perform ePO remote commands.
 
+* Node.js 4.0 or higher installed.
+
 ### Installation
 
 The ePO DXL Node-RED client package can be installed via the following
