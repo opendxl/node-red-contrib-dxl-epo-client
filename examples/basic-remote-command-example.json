@@ -1,32 +1,31 @@
 [
     {
-        "id": "d1ae19ed.a093e8",
+        "id": "804e2e98.47cbf",
         "type": "tab",
         "label": "ePO Remote Command Example",
         "disabled": false,
-        "info": "This sample invokes and displays the results of a \"system.findTag\" remote command\r\nvia the ePO DXL service. The results of the find command are displayed on the\r\nNode-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see the\r\n  [DXL Configuration Sample](https://github.com/opendxl/node-red-contrib-dxl/wiki/Client-Configuration)).\r\n* The ePO DXL service is running\r\n  (see [Running Service](https://opendxl.github.io/opendxl-epo-service-python/pydoc/running.html)).\r\n* The DXL client associated with the\r\n`Find tags in ePO` node is authorized to invoke the ePO DXL Service\r\n  (see [Client Authorization](https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization)).\r\n* The user that is connecting to the ePO server has permission to execute the\r\n  \"system.findTag\" remote command\r\n  (see [Service Configuration File](https://opendxl.github.io/opendxl-epo-service-python/pydoc/configuration.html#dxl-service-config-file-label)).\r\n\r\n### Setup\r\n\r\n* If more than one ePO service is available on the DXL fabric that the DXL\r\n  client is connecting to, edit the `Find tags in ePO` node and set the `ePO Id`\r\n  property to the value of the `uniqueId` specified in the \r\n  [Service Configuration File](https://opendxl.github.io/opendxl-epo-service-python/pydoc/configuration.html#dxl-service-config-file-label).\r\n  By default, the `ePO Id` property is empty, in which case the client attempts\r\n  to dynamically determine the id of the ePO service to communicate with.\r\n* Edit the `Set search text` node and modify the `Payload` property with the\r\n  search text to use for the system find tag command. For example:\r\n\r\n  ```json\r\n  {\"searchText\":\"broker\"}\r\n  ```\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Find tags in ePO` node.\r\n\r\n### Running\r\n\r\nTo exercise the flow, double-click the button on the left side of the\r\n`Set search text` node.\r\n\r\n### Output\r\n\r\nThe following output should appear in the Node-RED `debug` tab:\r\n\r\n```\r\n▶ [ object ]\r\n```\r\n\r\nAfter clicking on the right arrow button to expand the contents of the object,\r\noutput similar to the following should appear\r\n\r\n```\r\n▼ 0: object\r\n  tagId: 3\r\n  tagName: \"DXLBROKER\"\r\n  tagNotes: \"DXL Broker\"\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Set search text\r\n\r\nThis is an `inject` input node which starts the flow. This node injects a new\r\nmessage with a JSON-formatted document as the `payload`. The document\r\nspecifies the parameters to use for the ePO remote command. The parameters for\r\nthe \"system.findTag\" command include a `searchText` key with a corresponding\r\nvalue to be used as the text for the search.\r\n\r\nTo see the full list of remote commands and parameters that the ePO server\r\nsupports, a node which invokes the `core.help` remote command with an\r\nempty JSON document `{}` as the `payload` parameter could be included in a flow.\r\n\r\n#### Find tags in ePO\r\n\r\nThis is an `epo remote command` node. This node connects to the DXL fabric and\r\nsends a DXL `Request` message to the ePO service.\r\n\r\nThe `Command` property specifies the target remote command as `system.findTag`.\r\n\r\nThe DXL request message contains parameters set in the `payload` by the\r\n`Set search text` node.\r\n \r\nThe `Return` property is set to \"a parsed JSON object\" and the `Format` property\r\nis set to \"JSON\" to indicate that the payload for the response should be\r\nadded to the output message as a JavaScript object decoded from JSON.\r\n\r\n#### Output tags\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Find tags in ePO` node. The output should include the\r\nresponse received from the DXL fabric for the `system.findTag` command.\r\n"
+        "info": "This sample invokes and displays the results of a `system.findTag` remote\r\ncommand via the ePO DXL service. The results of the find command are displayed\r\non the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see the\r\n  [DXL Configuration Sample](https://github.com/opendxl/node-red-contrib-dxl/wiki/Client-Configuration)).\r\n* A ePO DXL service is running and available on the DXL fabric. If version 5.0\r\n  or later of the DXL ePO extensions are installed on your ePO server, an ePO\r\n  DXL service should already be running on the fabric. If you are using an\r\n  earlier version of the DXL ePO extensions, you can use the\r\n  [ePO DXL Python Service](https://github.com/opendxl/opendxl-epo-service-python).\r\n* The DXL client associated with the `Find tags in ePO` node is authorized to\r\n  invoke the ePO DXL service, and the user that is connecting to the ePO server\r\n  (within the ePO DXL service) has permission to execute the `system.findTag`\r\n  remote command (see\r\n  [Client Authorization](https://opendxl.github.io/opendxl-epo-client-python/pydoc/authorization.html)).\r\n\r\n### Setup\r\n\r\n* If more than one ePO service is available on the DXL fabric that the DXL\r\n  client is connecting to, edit the `Find tags in ePO` node and set the `ePO Id`\r\n  property to that of the ePO service through which the remote command should be\r\n  performed. By default, the `ePO Id` property is empty, in which case the\r\n  client attempts to dynamically determine the id of the ePO service to\r\n  communicate with.\r\n* Edit the `Set search text` node and modify the `Payload` property with the\r\n  search text to use for the system find tag command. For example:\r\n\r\n  ```json\r\n  {\"searchText\":\"broker\"}\r\n  ```\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Find tags in ePO` node.\r\n\r\n### Running\r\n\r\nTo exercise the flow, double-click the button on the left side of the\r\n`Set search text` node.\r\n\r\n### Output\r\n\r\nThe following output should appear in the Node-RED `debug` tab:\r\n\r\n```\r\n▶ [ object ]\r\n```\r\n\r\nAfter clicking on the right arrow button to expand the contents of the object,\r\noutput similar to the following should appear\r\n\r\n```\r\n▼ 0: object\r\n  tagId: 3\r\n  tagName: \"DXLBROKER\"\r\n  tagNotes: \"DXL Broker\"\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Set search text\r\n\r\nThis is an `inject` input node which starts the flow. This node injects a new\r\nmessage with a JSON-formatted document as the `payload`. The document\r\nspecifies the parameters to use for the ePO remote command. The parameters for\r\nthe \"system.findTag\" command include a `searchText` key with a corresponding\r\nvalue to be used as the text for the search.\r\n\r\nTo see the full list of remote commands and parameters that the ePO server\r\nsupports, a node which invokes the `core.help` remote command with an\r\nempty JSON document `{}` as the `payload` parameter could be included in a flow.\r\n\r\n#### Find tags in ePO\r\n\r\nThis is an `epo remote command` node. This node connects to the DXL fabric and\r\nsends a DXL `Request` message to the ePO service.\r\n\r\nThe `Command` property specifies the target remote command as `system.findTag`.\r\n\r\nThe DXL request message contains parameters set in the `payload` by the\r\n`Set search text` node.\r\n \r\nThe `Return` property is set to \"a parsed JSON object\" and the `Format` property\r\nis set to \"JSON\" to indicate that the payload for the response should be\r\nadded to the output message as a JavaScript object decoded from JSON.\r\n\r\n#### Output tags\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Find tags in ePO` node. The output should include the\r\nresponse received from the DXL fabric for the `system.findTag` command.\r\n"
     },
     {
-        "id": "1d099f44.68cf81",
+        "id": "d97b5c6d.c408f",
         "type": "dxl-epo-remote-command",
-        "z": "d1ae19ed.a093e8",
+        "z": "804e2e98.47cbf",
         "name": "Find tags in ePO",
         "command": "system.findTag",
         "client": "",
         "returnType": "obj",
-        "outputFormat": "json",
         "x": 330,
         "y": 100,
         "wires": [
             [
-                "ece54178.3f2eb"
+                "b273de3e.5fb43"
             ]
         ]
     },
     {
-        "id": "3d75219c.3df12e",
+        "id": "6bb5aca0.0eb844",
         "type": "inject",
-        "z": "d1ae19ed.a093e8",
+        "z": "804e2e98.47cbf",
         "name": "Set search text",
         "topic": "",
         "payload": "{\"searchText\":\"<specify-search-text>\"}",
@@ -39,14 +38,14 @@
         "y": 100,
         "wires": [
             [
-                "1d099f44.68cf81"
+                "d97b5c6d.c408f"
             ]
         ]
     },
     {
-        "id": "ece54178.3f2eb",
+        "id": "b273de3e.5fb43",
         "type": "debug",
-        "z": "d1ae19ed.a093e8",
+        "z": "804e2e98.47cbf",
         "name": "Output tags",
         "active": true,
         "tosidebar": true,
@@ -58,9 +57,9 @@
         "wires": []
     },
     {
-        "id": "6a2e1088.09d28",
+        "id": "24accb86.c71b94",
         "type": "comment",
-        "z": "d1ae19ed.a093e8",
+        "z": "804e2e98.47cbf",
         "name": "Supply the tag search text to use in the 'Set search text' node ",
         "info": "",
         "x": 260,
