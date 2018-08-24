@@ -6,7 +6,7 @@ following prerequisites must be satisfied:
 * Node-RED must be installed.
 
   The [OpenDXL Node-RED Docker](https://github.com/opendxl/opendxl-node-red-docker)
-  repository provides instructions on how create a Node-RED container in
+  repository provides instructions on how to create a Node-RED container in
   [Docker](https://www.docker.com/).
 
   For more information on other Node-RED installation approaches, see
