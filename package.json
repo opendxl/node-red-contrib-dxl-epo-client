@@ -63,7 +63,7 @@
     "lint:standard": "standard \"**/*.html\" \"**/*.js\" | snazzy",
     "preci": "npm run lint",
     "ci": "npm run test",
-    "doc": "jsdoc -c ./doc/conf.json doc/index.md -r lib/ -u doc/sdk -d out/jsdoc",
+    "doc": "jsdoc -c ./doc/conf.json doc/index.md -r lib/ nodes/ -u doc/sdk -d out/jsdoc",
     "postdoc": "node scripts/postdoc.js"
   },
   "standard": {

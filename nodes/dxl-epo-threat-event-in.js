@@ -25,6 +25,7 @@ module.exports = function (RED) {
    *   an Object (decoded as a JSON document from the original payload). If an
    *   error occurs when attempting to convert the binary Buffer of the payload
    *   into the desired data type, the current flow is halted with an error.
+   * @private
    * @constructor
    */
   function EpoThreatEventInNode (nodeConfig) {
