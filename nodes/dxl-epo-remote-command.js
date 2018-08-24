@@ -22,7 +22,7 @@ module.exports = function (RED) {
    *   specify the ePO server that this client will communicate with.
    * @param {String} [nodeConfig.returnType=obj] - Controls the data type for
    *   the remote command response payload, set as `msg.payload`. If
-   *   returnType is 'bin', `msg.payload` is raw binary Buffer. If returnType
+   *   returnType is 'bin', `msg.payload` is a raw binary Buffer. If returnType
    *   is 'txt', `msg.payload` is a String (decoded as UTF-8). If returnType is
    *   'obj', is an Object (decoded as a JSON document from the original
    *   payload). If an error occurs when attempting to convert the binary

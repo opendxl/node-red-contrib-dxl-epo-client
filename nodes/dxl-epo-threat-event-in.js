@@ -20,7 +20,7 @@ module.exports = function (RED) {
    *   Topic to subscribe to for event notifications.
    * @param {String} [nodeConfig.payloadType=obj] - Controls the data type for
    *   the threat event payload, set as `msg.payload`. If payloadType is 'bin',
-   *   `msg.payload` is raw binary Buffer. If payloadType is 'txt',
+   *   `msg.payload` is a raw binary Buffer. If payloadType is 'txt',
    *   `msg.payload` is a String (decoded as UTF-8). If payloadType is 'obj', is
    *   an Object (decoded as a JSON document from the original payload). If an
    *   error occurs when attempting to convert the binary Buffer of the payload
