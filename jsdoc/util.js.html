@@ -89,10 +89,10 @@ function runEpoCommand (node, msg, epoClient, command, params, outputFormat) {
   params = params || {}
   epoClient.runCommand(
     command,
-    function (error, result) {
-      handleCommandResponse(node, msg, error, result)
-    },
     {
+      responseCallback: function (error, result) {
+        handleCommandResponse(node, msg, error, result)
+      },
       params: params,
       outputFormat: outputFormat
     }
@@ -146,15 +146,8 @@ module.exports = {
       }
       var epoUniqueId = NodeUtils.defaultIfEmpty(nodeConfig.epoUniqueId,
         msg.epoUniqueId)
-      var epoClient = new EpoClient(dxlClient, epoUniqueId,
-        function (error) {
-          if (error) {
-            node.error('Error creating ePO client: ' + error.message)
-          } else {
-            runEpoCommand(node, msg, epoClient, command, params, outputFormat)
-          }
-        }
-      )
+      var epoClient = new EpoClient(dxlClient, epoUniqueId)
+      runEpoCommand(node, msg, epoClient, command, params, outputFormat)
     } else {
       node.error('ePO remote command was not specified', msg)
     }
