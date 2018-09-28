@@ -51,6 +51,7 @@
       "dxl-epo-system-apply-tag": "./nodes/dxl-epo-system-apply-tag.js",
       "dxl-epo-system-clear-tag": "./nodes/dxl-epo-system-clear-tag.js",
       "dxl-epo-system-find": "./nodes/dxl-epo-system-find.js",
+      "dxl-epo-threat-event-create": "./nodes/dxl-epo-threat-event-create.js",
       "dxl-epo-threat-event-in": "./nodes/dxl-epo-threat-event-in.js"
     }
   },

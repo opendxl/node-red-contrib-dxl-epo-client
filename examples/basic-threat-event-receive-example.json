@@ -1,0 +1,39 @@
+[
+    {
+        "id": "66f8aca1.8561f4",
+        "type": "tab",
+        "label": "ePO Receive Threat Event Example",
+        "disabled": false,
+        "info": "This sample registers with the DXL fabric to receive threat event notifications\r\nfrom ePO via the ePO DXL service. The payload in the event message received from\r\nthe DXL fabric is printed to the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see\r\n  [Client Configuration](https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html)).\r\n* The client is authorized to receive \"ePO Threat Event Automatic Response Events\"\r\n  (see [Client Authorization](https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization)).\r\n* Under the `Automatic Responses` page on the ePO server, ensure that a\r\n  `Send Threat Event via DXL` response is set to `Enabled`.\r\n\r\n### Setup\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Receive ePO threat event`\r\n  node.\r\n* By default, the `Topic` configured for the `Send Threat Event via DXL`\r\n  automatic response on the ePO server is set to\r\n  \"/mcafee/event/epo/threat/response\". If you have changed this to a different \r\n  value, edit the `Receive ePO threat event` node and set the value for\r\n  the `Topic` property to be the same as the `Topic` value used for the automatic\r\n  response on the ePO server.\r\n\r\n### Output\r\n\r\nWhen an ePO threat event is received, the following output should appear in the\r\nNode-RED `debug` tab:\r\n\r\n```\r\n▶ [ object ]\r\n```\r\n\r\nClick on the right arrow button to expand the contents of the object. The\r\ncontent may be similar to the following:\r\n\r\n```\r\n▼ object\r\n  eventMsgVersion: \"1.0\"\r\n  eventMsgType: \"McAfee Common Event\"\r\n  ▼ event: object\r\n    category: \"(This is the event category)\"\r\n    ...\r\n    ▼ source: object\r\n      ipv4: \"10.0.0.254\"\r\n...\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Receive ePO threat event\r\n\r\nThis is an `epo threat event` input node which starts the flow. This node\r\ninjects a new message with a `payload` property which includes the information\r\nfrom the threat event.\r\n\r\n#### Output result\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Receive ePO threat event` node."
+    },
+    {
+        "id": "e7fb65ba.3583d8",
+        "type": "dxl-epo-threat-event in",
+        "z": "66f8aca1.8561f4",
+        "name": "Receive ePO threat event",
+        "topic": "",
+        "client": "",
+        "payloadType": "obj",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "d1c1788e.65f24"
+            ]
+        ]
+    },
+    {
+        "id": "d1c1788e.65f24",
+        "type": "debug",
+        "z": "66f8aca1.8561f4",
+        "name": "Output event payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 360,
+        "y": 40,
+        "wires": []
+    }
+]

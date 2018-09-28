@@ -51,6 +51,11 @@
         <dt>payload <span class="property-type">string | object | buffer</span></dt>
         <dd> Payload of the threat event. Through the <code>Payload type</code> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Under the "Automatic Responses" page on the ePO server, ensure that a <code>Send Threat Event via DXL</code> response is set to <code>Enabled</code>.</li>
+        <li>The DXL client that this node is using is authorized to receive <code>ePO Threat Event Automatic Response Events</code> (see <a href="https://opendxl.github.io/opendxl-epo-service-python/pydoc/authorization.html#client-authorization" target="_blank">Client Authorization</a>).</li>
+    </ul>
     <h3>Node Properties</h3>
     <dl class="message-properties">
         <dt>Client</dt>
