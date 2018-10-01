@@ -1,35 +1,35 @@
 [
     {
-        "id": "bb30832f.dfb2d",
+        "id": "10e0d038.6e2aa",
         "type": "tab",
         "label": "ePO System Clear Tag Example",
         "disabled": false,
-        "info": "This sample invokes and displays the results of a `system.clearTag` remote\r\ncommand via the ePO DXL service. The results of the clear command are displayed\r\non the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see\r\n  [Client Configuration](https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html)).\r\n* A ePO DXL service is running and available on the DXL fabric. If version 5.0\r\n  or later of the DXL ePO extensions are installed on your ePO server, an ePO\r\n  DXL service should already be running on the fabric. If you are using an\r\n  earlier version of the DXL ePO extensions, you can use the\r\n  [ePO DXL Python Service](https://github.com/opendxl/opendxl-epo-service-python).\r\n* The DXL client associated with the `Clear system tag from ePO` node is\r\n  authorized to invoke the ePO DXL service, and the user that is connecting to\r\n  the ePO server (within the ePO DXL service) has permission to execute the\r\n  `system.clearTag` remote command (see\r\n  [Client Authorization](https://opendxl.github.io/opendxl-epo-client-python/pydoc/authorization.html)).\r\n\r\n### Setup\r\n\r\n* If more than one ePO service is available on the DXL fabric that the DXL\r\n  client is connecting to, edit the `Clear system tag from ePO` node and set the\r\n  `ePO Id` property to that of the ePO service through which the remote command\r\n  should be performed. By default, the `ePO Id` property is empty, in which case\r\n  the client attempts to dynamically determine the id of the ePO service to\r\n  communicate with.\r\n* Edit the `Specify systems to clear tag from` node and modify the `Payload`\r\n  property with the name(s) of the system(s) to clear the tag from. System names\r\n  should be separated by commas. For example:\r\n\r\n  ```\r\n  system1,system2\r\n  ```\r\n\r\n* Edit the `Clear system tag from ePO` node and modify the `Tag name` property\r\n  with the name of the tag to clear. For example:\r\n\r\n  ```\r\n  mytag1\r\n  ```\r\n  \r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Clear system tag from ePO`\r\n  node.\r\n\r\n### Running\r\n\r\nTo exercise the flow, double-click the button on the left side of the\r\n`Specify systems to clear tag from` node.\r\n\r\n### Output\r\n\r\nThe number of systems that the tag was cleared from should appear in the\r\nNode-RED `debug` tab. For example:\r\n\r\n```\r\n2\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Specify systems to clear tag from\r\n\r\nThis is an `inject` input node which starts the flow. This node injects a new\r\nmessage with a `payload` property which specifies the name(s) of the system(s)\r\nto clear the tag from.\r\n\r\n#### Set names request parameter\r\n\r\nThis is a `change` node which copies the value from the `payload` property on\r\nthe message to the `names` property. The `Clear system tag from ePO` node uses the `names` property\r\nwhen constructing the parameters for the `system.clearTag` remote command. \r\n\r\n#### Apply system tag in ePO\r\n\r\nThis is an `epo system clear tag` node. This node connects to the DXL fabric and\r\nsends a DXL `Request` message to the ePO service. The message specifies the\r\ntarget remote command as `system.clearTag`.\r\n\r\nThe request message also includes the `msg.names` property set by the\r\n`Set names request parameter` node and the `tagName` set in the\r\n`Tag name` property.\r\n \r\nThe `Return` property is set to \"a parsed JSON object\" and the `Format` property\r\nis set to \"JSON\" to indicate that the payload for the response should be\r\nadded to the output message as a JavaScript object decoded from JSON.\r\n\r\n#### Output result\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Clear system tag from ePO` node. The output should include\r\nthe response received from the DXL fabric for the `system.clearTag` command."
+        "info": "This sample invokes and displays the results of a `system.clearTag` remote\r\ncommand via the ePO DXL service. The results of the clear command are displayed\r\non the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see\r\n  [Client Configuration](https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html)).\r\n* A ePO DXL service is running and available on the DXL fabric. If version 5.0\r\n  or later of the DXL ePO extensions are installed on your ePO server, an ePO\r\n  DXL service should already be running on the fabric. If you are using an\r\n  earlier version of the DXL ePO extensions, you can use the\r\n  [ePO DXL Python Service](https://github.com/opendxl/opendxl-epo-service-python).\r\n* The DXL client associated with the `Clear system tag from ePO` node is\r\n  authorized to invoke the ePO DXL service, and the user that is connecting to\r\n  the ePO server (within the ePO DXL service) has permission to execute the\r\n  `system.clearTag` remote command (see\r\n  [Client Authorization](https://opendxl.github.io/opendxl-epo-client-python/pydoc/authorization.html)).\r\n\r\n### Setup\r\n\r\n* Edit the `Set system clear tag request parameters` node.\r\n\r\n  * Set the value for the `msg.names` rule to the name(s) of the system(s) that\r\n    the tag should be cleared from. If the tag should be cleared from more than one\r\n    system, the list of system names should be separated by commas. For example:\r\n\r\n    ```\r\n    system1,system2\r\n    ```\r\n\r\n  * Set the value for the `msg.tagName` rule to the name of the tag which should\r\n    be cleared. For example:\r\n  \r\n    ```\r\n    mytag1\r\n    ```\r\n\r\n  * If more than one ePO service is available on the DXL fabric that the DXL\r\n    client is connecting to, set the value for the `msg.epoUniqueId` rule to\r\n    the ID of the ePO service through which the remote command should be\r\n    performed.\r\n \r\n    By default, the `msg.epoUniqueId` property is empty, in which case the\r\n    client attempts to dynamically determine the ID of the ePO service to\r\n    communicate with.\r\n\r\n* To deploy the flow, press the `Deploy` button in the upper-right corner of the\r\n  screen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\n  with the word `connected` should appear under the `Clear system tag from ePO`\r\n  node.\r\n\r\n### Running\r\n\r\nTo exercise the flow, double-click the button on the left side of the\r\n`Start flow` node.\r\n\r\n### Output\r\n\r\nThe number of systems that the tag was cleared from should appear in the\r\nNode-RED `debug` tab. For example, if the list of system names was\r\n`system1,system2,system3` and the tag had already been applied to `system1` and\r\n`system3` but not to `system2` before the flow was executed, the following\r\nshould appear in the `debug` tab output:\r\n\r\n```\r\n2\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Start flow\r\n\r\nThis is an `inject` input node which starts the flow.\r\n\r\n#### Set system clear tag request parameters\r\n\r\nThis is a `change` node which sets the names of the system(s) which the\r\ntag should be cleared from as the `names` property on the message and the name\r\nof the tag to clear as the `tagName` property on the message. The\r\n`Clear system tag from ePO` node uses the `names` and `tagName` properties when\r\nconstructing the parameters for the `system.clearTag` remote command. This\r\nnode also sets a value for the `msg.epoUniqueId` property. If the value is\r\nnot empty, it is used as the unique ID of the ePO server which the remote\r\ncommand is sent to.\r\n\r\n#### Clear system tag from ePO\r\n\r\nThis is an `epo system clear tag` node. This node connects to the DXL fabric and\r\nsends a DXL `Request` message to the ePO service. The message specifies the\r\ntarget remote command as `system.clearTag`.\r\n\r\nThe request message also includes the `msg.names` and `msg.tagName` properties\r\nset by the `Set system clear tag request parameters` node.\r\n\r\nThe `Return` property is set to \"a parsed JSON object\" and the `Format` property\r\nis set to \"JSON\" to indicate that the payload for the response should be\r\nadded to the output message as a JavaScript object decoded from JSON.\r\n\r\n#### Output result\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on\r\nthe message by the `Clear system tag from ePO` node. The output should include\r\nthe response received from the DXL fabric for the `system.clearTag` command."
     },
     {
-        "id": "f4f8e30.f181c2",
+        "id": "16c1a6be.cbfd19",
         "type": "inject",
-        "z": "bb30832f.dfb2d",
-        "name": "Specify systems to clear tag from",
+        "z": "10e0d038.6e2aa",
+        "name": "Start flow",
         "topic": "",
-        "payload": "<specify-systems-to-clear-tag-from>",
+        "payload": "",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 170,
+        "x": 100,
         "y": 100,
         "wires": [
             [
-                "a61a3c23.c794e"
+                "f45beb95.138e58"
             ]
         ]
     },
     {
-        "id": "9239497c.8ae8a8",
+        "id": "89db8302.57d8d",
         "type": "debug",
-        "z": "bb30832f.dfb2d",
+        "z": "10e0d038.6e2aa",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
@@ -41,33 +41,41 @@
         "wires": []
     },
     {
-        "id": "c135ab73.671a08",
+        "id": "593ca3cd.43429c",
         "type": "dxl-epo-system-clear-tag",
-        "z": "bb30832f.dfb2d",
+        "z": "10e0d038.6e2aa",
         "name": "",
-        "tagName": "<specify-tag-to-clear>",
+        "tagName": "",
         "client": "",
+        "epoUniqueId": "",
         "returnType": "obj",
         "x": 320,
         "y": 300,
         "wires": [
             [
-                "9239497c.8ae8a8"
+                "89db8302.57d8d"
             ]
         ]
     },
     {
-        "id": "a61a3c23.c794e",
+        "id": "f45beb95.138e58",
         "type": "change",
-        "z": "bb30832f.dfb2d",
-        "name": "Set names request parameter",
+        "z": "10e0d038.6e2aa",
+        "name": "Set system clear tag request parameters",
         "rules": [
             {
                 "t": "set",
                 "p": "names",
                 "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
+                "to": "<specify-tag-to-clear>",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "tagName",
+                "pt": "msg",
+                "to": "<specify-systems-to-clear-tag-from>",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -75,32 +83,22 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
+        "x": 260,
         "y": 200,
         "wires": [
             [
-                "c135ab73.671a08"
+                "593ca3cd.43429c"
             ]
         ]
     },
     {
-        "id": "8c1f2641.e0e7f8",
+        "id": "376512b2.415eee",
         "type": "comment",
-        "z": "bb30832f.dfb2d",
-        "name": "Supply the list of systems to untag in the 'Set search text' node ",
+        "z": "10e0d038.6e2aa",
+        "name": "Supply the list of systems and name of the tag to clear in the 'Set system clear tag request parameters' node",
         "info": "",
-        "x": 240,
+        "x": 390,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "f6fe83e6.70cd2",
-        "type": "comment",
-        "z": "bb30832f.dfb2d",
-        "name": "Supply the tag name in the 'Clear system tag from ePO' node ",
-        "info": "",
-        "x": 400,
-        "y": 360,
         "wires": []
     }
 ]
