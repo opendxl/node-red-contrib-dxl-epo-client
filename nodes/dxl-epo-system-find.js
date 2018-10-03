@@ -17,6 +17,8 @@ module.exports = function (RED) {
    * @param {Object} nodeConfig - Configuration data which the node uses.
    * @param {String} nodeConfig.client - Id of the DXL client configuration node
    *   that this node should be associated with.
+   * @param {(String|Object)} [nodeConfig.searchText] - Search text for the
+   *   system(s) to find.
    * @param {(Number|Boolean)} [nodeConfig.searchNameOnly=0] - For a value of
    *   `1` or `true`, search only the system name field for the search text. For
    *   a value of `0` or `false`, search all system fields for the search text.
