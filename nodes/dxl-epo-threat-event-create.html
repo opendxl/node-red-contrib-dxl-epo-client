@@ -1,0 +1,84 @@
+<script type="text/javascript">
+  RED.nodes.registerType('dxl-epo-threat-event-create', {
+    category: 'epo operations',
+    defaults: {
+      name: {value: ''},
+      client: {type: 'dxl-client', required: true},
+      searchNameOnly: {value: ''},
+      epoUniqueId: {value: ''},
+      returnType: {value: 'obj'}
+    },
+    color: '#e9e9e9',
+    inputs: 1,
+    outputs: 1,
+    icon: 'mcafee.png',
+    label: function () {
+      return this.name || 'Create threat event in ePO'
+    },
+    labelStyle: function () {
+      return this.name ? 'node_label_italic' : ''
+    },
+    paletteLabel: 'epo threat event create'
+  })
+</script>
+
+<script type="text/x-red" data-template-name="dxl-epo-threat-event-create">
+    <div class="form-row">
+        <label for="node-input-client"><i class="icon-tag"></i> Client</label>
+        <input type="text" id="node-input-client" placeholder="Client">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-epoUniqueId"><i class="fa fa-tag"></i> ePO Id</label>
+        <input type="text" id="node-input-epoUniqueId" placeholder="Id">
+    </div>
+    <div class="form-row">
+        <label for="node-input-returnType"><i class="fa fa-arrow-left"></i> Return</span></label>
+        <select type="text" id="node-input-returnType" style="width:70%;">
+            <option value="txt">a UTF-8 string</option>
+            <option value="bin">a binary buffer</option>
+            <option value="obj">a parsed JSON object</option>
+        </select>
+    </div>
+    <div class="form-tips">Tip: Leave ePO id blank if you want to set it via the <code>msg.epoUniqueId</code> property</div>
+</script>
+
+<script type="text/x-red" data-help-name="dxl-epo-threat-event-create">
+    <p>Create a threat event in ePO.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>event <span class="property-type">string | object</span></dt>
+        <dd> Event to create.</dd>
+        <dt class="optional">epoUniqueId <span class="property-type">string</span></dt>
+        <dd> Id of the ePO server to communicate with.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string | object | buffer</span></dt>
+        <dd> Result of the remote command execution.
+         Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+    </dl>
+    <p>The <code>event</code> property is removed from the output message.</p>
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>This node requires an ePO DXL service to be running and available on the DXL fabric.
+        If version 5.0 or later of the DXL ePO extensions are installed on your ePO server, an ePO DXL service should already be running on the fabric.
+        If you are using an earlier version of the DXL ePO extensions, you can use the <a href="https://github.com/opendxl/opendxl-epo-service-python" target="_blank">ePO DXL Python Service</a>.</li>
+        <li>The DXL client that this node is using is authorized to invoke the ePO DXL service, and the user that is connecting to the ePO server (within the ePO DXL service) has permission to execute the <code>DxlBrokerMgmt.createEpoThreatEvent</code> remote command (see <a href="https://opendxl.github.io/opendxl-epo-client-python/pydoc/authorization.html" target="_blank">Client Authorization</a>).</li>
+    </ul>
+    <h3>Node Properties</h3>
+    <dl class="message-properties">
+        <dt>Client</dt>
+        <dd> Configuration node for the DXL client through which the request should be made. Click on the pencil icon to add or modify a client configuration.</dd>
+        <dt>Name</dt>
+        <dd> Used only for display purposes in the Node-RED user interface.</dd>
+        <dt>ePO Id</dt>
+        <dd> Id of the ePO server to communicate with. If the value is empty, the ePO unique id will be derived from the input message's <code>msg.epoUniqueId</code> property.
+        If the id is not set either in the node definition or the input message, the node tries to determine the ePO server id dynamically. If no ids or more than one id is found when determining the ePO id dynamically, the current flow is halted with an error.</dd>
+        <dt>Return</dt>
+        <dd> Controls the data type for the <code>msg.payload</code> property in the output message.</dd>
+    </dl>
+</script>

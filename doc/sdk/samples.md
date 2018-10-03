@@ -35,7 +35,12 @@ command via the ePO DXL service.
 This sample invokes and displays the results of a `system.find` remote command
 via the ePO DXL service.
 
-### Basic Threat Event (basic-threat-event-example)
+### Basic Create Threat Event (basic-threat-event-create-example)
+
+This sample invokes and displays the results of a
+`DxlBrokerMgmt.createEpoThreatEvent` remote command via the ePO DXL service.
+
+### Basic Receive Threat Event (basic-threat-event-receive-example)
 
 This sample registers with the DXL fabric to receive threat event notifications
 from ePO via the ePO DXL service.
